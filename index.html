@@ -1,10 +1,633 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Sprout Canvas</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sprout Canvas - Supporting Every Learner, One Tool at a Time</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-green: #48bb78;
+            --light-green: #68d391;
+            --primary-blue: #4299e1;
+            --light-blue: #3182ce;
+            --navy: #2d3748;
+            --cream: #f7f3e9;
+            --white: #ffffff;
+            --light-gray: #f7fafc;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            color: var(--navy);
+            line-height: 1.6;
+            background-color: var(--white);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Trust Badge */
+        .trust-badge {
+            background-color: var(--cream);
+            padding: 10px 0;
+            text-align: center;
+            font-size: 14px;
+            color: var(--navy);
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        .trust-badge strong {
+            color: var(--primary-green);
+        }
+
+        /* Header */
+        .header {
+            background-color: var(--white);
+            padding: 20px 0;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--primary-green);
+        }
+
+        .logo::before {
+            content: "🌱 ";
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, var(--cream) 0%, var(--light-green) 100%);
+            padding: 80px 0;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 48px;
+            font-weight: 700;
+            color: var(--navy);
+            margin-bottom: 20px;
+            line-height: 1.2;
+        }
+
+        .hero .subtitle {
+            font-size: 20px;
+            color: var(--navy);
+            margin-bottom: 15px;
+        }
+
+        .hero .description {
+            font-size: 16px;
+            color: var(--navy);
+            max-width: 650px;
+            margin: 0 auto 40px;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 24px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            margin: 0 10px 10px 0;
+        }
+
+        .btn-primary {
+            background-color: var(--primary-green);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background-color: #3fb76b;
+            transform: translateY(-2px);
+        }
+
+        .btn-secondary {
+            background-color: var(--primary-blue);
+            color: white;
+        }
+
+        .btn-secondary:hover {
+            background-color: #3182ce;
+            transform: translateY(-2px);
+        }
+
+        /* What Makes Us Different */
+        .features {
+            padding: 80px 0;
+            background-color: var(--white);
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 36px;
+            font-weight: 700;
+            color: var(--navy);
+            margin-bottom: 20px;
+        }
+
+        .section-subtitle {
+            text-align: center;
+            font-size: 18px;
+            color: var(--navy);
+            margin-bottom: 60px;
+            max-width: 650px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .features-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 40px;
+        margin-top: 60px;
+        max-width: 1200px;
+        margin-left: auto;
+        margin-right: auto;
+        }
+
+        .feature {
+            text-align: center;
+            padding: 30px;
+            border-radius: 12px;
+            background-color: var(--light-gray);
+        }
+
+        .feature-icon {
+            font-size: 48px;
+            margin-bottom: 20px;
+        }
+
+        .feature h3 {
+            font-size: 24px;
+            font-weight: 600;
+            color: var(--navy);
+            margin-bottom: 15px;
+        }
+
+        .feature p {
+            color: var(--navy);
+        }
+
+        /* Competitive Advantage Section */
+        .competitive-advantage {
+            padding: 80px 0;
+            background-color: var(--cream);
+        }
+
+        .advantage-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 40px;
+        margin-top: 40px;
+        max-width: 1000px;
+        margin-left: auto;
+        margin-right: auto;
+        }
+
+
+        .advantage-item {
+            background-color: var(--white);
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        .advantage-item h4 {
+            color: var(--primary-green);
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+        .advantage-item p {
+            color: var(--navy);
+            margin-bottom: 15px;
+        }
+
+        .vs-point {
+            background-color: var(--light-gray);
+            padding: 15px;
+            border-radius: 8px;
+            font-size: 14px;
+            color: var(--navy);
+            border-left: 4px solid var(--primary-green);
+        }
+
+        /* Products Section */
+        .products {
+            padding: 80px 0;
+            background-color: var(--white);
+        }
+
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 60px;
+        }
+
+        .product {
+            background-color: var(--light-gray);
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            text-align: center;
+            border: 2px solid transparent;
+            transition: all 0.3s ease;
+        }
+
+        .product:hover {
+            border-color: var(--primary-green);
+            transform: translateY(-5px);
+        }
+
+        .product h3 {
+            font-size: 24px;
+            font-weight: 600;
+            color: var(--navy);
+            margin-bottom: 15px;
+        }
+
+        .product p {
+            color: var(--navy);
+            margin-bottom: 20px;
+        }
+
+        .price {
+            font-size: 28px;
+            font-weight: 700;
+            color: var(--primary-green);
+            margin-bottom: 20px;
+        }
+
+        .product-badge {
+            background-color: var(--primary-green);
+            color: white;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+            margin-bottom: 15px;
+            display: inline-block;
+        }
+
+        /* About Section */
+        .about {
+            padding: 80px 0;
+            background-color: var(--light-gray);
+        }
+
+        .about-content {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .about p {
+            font-size: 18px;
+            margin-bottom: 20px;
+        }
+
+        /* Email Signup */
+        .email-signup {
+            padding: 80px 0;
+            background: linear-gradient(135deg, var(--primary-green) 0%, var(--light-green) 100%);
+            color: white;
+            text-align: center;
+        }
+
+        .email-signup h2 {
+            color: white;
+            margin-bottom: 20px;
+        }
+
+        .email-signup p {
+            color: white;
+            margin-bottom: 40px;
+        }
+
+        .email-form {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .email-form input {
+            padding: 12px 20px;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            min-width: 300px;
+        }
+
+        .email-form button {
+            padding: 12px 24px;
+            background-color: white;
+            color: var(--primary-green);
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        /* Footer */
+        .footer {
+            background-color: var(--navy);
+            color: white;
+            padding: 40px 0;
+            text-align: center;
+        }
+
+        .footer p {
+            margin-bottom: 10px;
+        }
+
+        .footer a {
+            color: var(--light-blue);
+            text-decoration: none;
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+        .features-grid {
+        grid-template-columns: 1fr;
+        gap: 30px;
+        }
+}
+
+            .hero .subtitle {
+                font-size: 18px;
+            }
+
+            .section-title {
+                font-size: 28px;
+            }
+
+            .features-grid,
+            .products-grid {
+                grid-template-columns: 1fr;
+            }
+            .advantage-grid {
+            grid-template-columns: repeat(3, 1fr);
+}
+
+            .email-form {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .email-form input {
+                min-width: 250px;
+            }
+        }
+    </style>
 </head>
 <body>
-  <h1>Welcome to Sprout Canvas</h1>
+    <!-- Trust Badge -->
+    <div class="trust-badge">
+        <strong>Family-tested resources</strong> • Proven effectiveness • <strong>Accessible to all families</strong>
+    </div>
+
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="logo">Sprout Canvas</div>
+            <div>
+                <a href="mailto:hello@sproutcanvas.com" class="btn btn-secondary">Contact</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <h1>Supporting Every Learner, One Tool at a Time</h1>
+            <p class="subtitle">Practical resources for communication, learning, and sensory support.</p>
+            <p class="description">Built for families who want effective tools that actually work in real-world settings. No expensive certifications required, no complex training programs—just quality resources that help every learner thrive.</p>
+            <a href="#products" class="btn btn-primary">Browse Proven Resources</a>
+            <a href="#email-signup" class="btn btn-secondary">Get Free Family-Tested Guide</a>
+        </div>
+    </section>
+
+    <!-- What Makes Us Different -->
+    <section class="features">
+        <div class="container">
+            <h2 class="section-title">What Makes Us Different</h2>
+            <p class="section-subtitle">We create resources that work in real-world settings, designed for families and educators who want practical solutions that actually help.</p>
+            
+            <div class="features-grid">
+                <div class="feature">
+                    <div class="feature-icon">💡</div>
+                    <h3>Results-Focused Design</h3>
+                    <p>Every resource is designed with one goal: helping learners succeed. We focus on practical solutions that families can implement immediately.</p>
+                </div>
+                <div class="feature">
+                    <div class="feature-icon">🏠</div>
+                    <h3>Family-Tested Effectiveness</h3>
+                    <p>Our tools are tested with real families to ensure they work in actual home and classroom settings, not just in theory.</p>
+                </div>
+                <div class="feature">
+                    <div class="feature-icon">🎯</div>
+                    <h3>Practical Implementation</h3>
+                    <p>Clear, straightforward resources that work for diverse learning styles without requiring expensive training or complex setup.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Competitive Advantage Section -->
+    <section class="competitive-advantage">
+        <div class="container">
+            <h2 class="section-title">The Practical Alternative</h2>
+            <p class="section-subtitle">See why accessible, family-friendly resources outperform expensive professional services for everyday learning success.</p>
+            
+            <div class="advantage-grid">
+                <div class="advantage-item">
+                    <h4>Quality Without Complexity</h4>
+                    <p>Get effective resources without the overwhelming complexity of professional certification programs or expensive ongoing services.</p>
+                    <div class="vs-point">
+                        <strong>Our Approach:</strong> Straightforward tools that work vs. complex training requirements
+                    </div>
+                </div>
+                
+                <div class="advantage-item">
+                    <h4>Proven Results</h4>
+                    <p>Our resources are validated through real-world use with diverse families and learners. You get tools that have actually helped others succeed.</p>
+                    <div class="vs-point">
+                        <strong>Our Focus:</strong> Real-world effectiveness vs. theoretical approaches
+                    </div>
+                </div>
+                
+                <div class="advantage-item">
+                    <h4>Affordable Excellence</h4>
+                    <p>Get professional-quality resources without the premium price tag. Effective learning tools shouldn't break the family budget.</p>
+                    <div class="vs-point">
+                        <strong>Our Commitment:</strong> High-quality, accessible pricing vs. expensive professional services
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Products Section -->
+    <section class="products" id="products">
+        <div class="container">
+            <h2 class="section-title">Proven Resource Categories</h2>
+            <p class="section-subtitle">Each category represents years of development and real-world validation with families and educators.</p>
+            
+            <div class="products-grid">
+                <!-- Category 1: Letter Board Lessons -->
+                <div class="product">
+                    <div class="product-badge">Family-Tested</div>
+                    <h3>Letter Board Lessons</h3>
+                    <p>Complete lesson plans developed through years of classroom experience. Each lesson includes step-by-step guidance, comprehension activities, and troubleshooting tips from real educators.</p>
+                    <div class="price">$8 - $25</div>
+                    <a href="#" class="btn btn-primary">Browse Proven Lessons</a>
+                </div>
+                
+                <!-- Category 2: TPT-Style Products -->
+                <div class="product">
+                    <div class="product-badge">Classroom-Validated</div>
+                    <h3>Printable Resources</h3>
+                    <p>Ready-to-use workbooks and activity sheets tested in real learning environments. Download, print, and use immediately—each resource comes with implementation guidance from experienced educators.</p>
+                    <div class="price">$5 - $15</div>
+                    <a href="#" class="btn btn-primary">Browse Validated Printables</a>
+                </div>
+                
+                <!-- Category 3: AAC Tools -->
+                <div class="product">
+                    <div class="product-badge">Expert-Designed</div>
+                    <h3>AAC Communication Tools</h3>
+                    <p>Visual supports and communication aids designed by professionals with deep experience in diverse communication needs. Each tool includes adaptation suggestions for different learners.</p>
+                    <div class="price">$10 - $20</div>
+                    <a href="#" class="btn btn-primary">Browse Expert Tools</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="about">
+        <div class="container">
+            <div class="about-content">
+                <h2 class="section-title">Our Promise to Families</h2>
+                <p>When you choose Sprout Canvas, you're investing in resources created with genuine care, extensive experience, and proven effectiveness.</p>
+                
+                <div class="features-grid">
+                    <div class="feature">
+                        <div class="feature-icon">⚡</div>
+                        <h3>Rigorously Tested</h3>
+                        <p>Every resource undergoes months of real-world testing with diverse learners before we offer it to families. We know it works because we've seen it work.</p>
+                    </div>
+                    <div class="feature">
+                        <div class="feature-icon">🤝</div>
+                        <h3>Authentically Inclusive</h3>
+                        <p>Our materials reflect genuine understanding of diverse learning needs, developed through years of working with real families.</p>
+                    </div>
+                    <div class="feature">
+                        <div class="feature-icon">🌟</div>
+                        <h3>Lasting Impact</h3>
+                        <p>We're building a community around sustainable, effective learning tools that families can depend on for years.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Blog/Insights Section -->
+    <section class="blog-preview" style="padding: 80px 0; background-color: var(--white);">
+        <div class="container">
+            <h2 class="section-title">Evidence-Based Insights</h2>
+            <p class="section-subtitle">Real strategies from real educators—proven methods from years of hands-on experience.</p>
+            
+            <div class="features-grid">
+                <div class="feature">
+                    <h3>Why Simple Often Works Best</h3>
+                    <p>Explore why straightforward, accessible resources often outperform complex professional programs for real-world family success.</p>
+                    <a href="#" style="color: var(--primary-blue); text-decoration: none; font-weight: 600;">Coming Soon →</a>
+                </div>
+                
+                <div class="feature">
+                    <h3>Getting Started Without Breaking the Bank</h3>
+                    <p>Essential communication setup that works for real families—no expensive courses required, just practical guidance you can implement today.</p>
+                    <a href="#" style="color: var(--primary-blue); text-decoration: none; font-weight: 600;">Coming Soon →</a>
+                </div>
+                
+                <div class="feature">
+                    <h3>What Really Works for Families</h3>
+                    <p>Real success stories showing how accessible, practical resources help learners thrive in everyday settings.</p>
+                    <a href="#" style="color: var(--primary-blue); text-decoration: none; font-weight: 600;">Coming Soon →</a>
+                </div>
+            </div>
+            
+            <div style="text-align: center; margin-top: 40px;">
+                <a href="#" class="btn btn-secondary">View All Evidence-Based Articles</a>
+            </div>
+        </div>
+    </section>
+
+    <section class="email-signup" id="email-signup">
+        <div class="container">
+            <h2>Join Our Practical Learning Community</h2>
+            <p>Connect with families who believe effective learning tools should be accessible, affordable, and proven to work in real settings.</p>
+            <p><strong>Get our FREE Family-Tested Letter Board Quick-Start Guide when you join!</strong></p>
+            <p><em>Instant download with practical tips that actually work for everyday families.</em></p>
+            
+            <form class="email-form" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+                <input type="email" name="email" placeholder="Enter your email address" required>
+                <button type="submit">Join the Movement</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="logo">🌱 Sprout Canvas</div>
+            <p>Supporting every learner with practical, family-tested tools.</p>
+            
+            <!-- Social Media Links -->
+            <div style="margin: 20px 0;">
+                <span style="color: #999; font-size: 14px;">Follow us on social media - Coming Soon!</span>
+            </div>
+            
+            <p>Contact: <a href="mailto:hello@sproutcanvas.com">hello@sproutcanvas.com</a></p>
+            <p>&copy; 2025 Sprout Canvas. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
 </body>
 </html>
